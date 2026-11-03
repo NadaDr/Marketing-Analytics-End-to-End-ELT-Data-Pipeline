@@ -1,0 +1,110 @@
+version: 2
+
+models:
+  - name: dim_channels
+    columns:
+      - name: channel_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_campaigns
+    columns:
+      - name: campaign_id
+        data_tests:
+          - not_null
+          - unique
+      - name: channel_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_id
+
+  - name: dim_ad_groups
+    columns:
+      - name: ad_group_id
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_campaigns')
+                field: campaign_id
+
+  - name: dim_date
+    columns:
+      - name: date_key
+        data_tests:
+          - not_null
+          - unique
+
+  - name: fct_daily_performance
+    columns:
+      - name: performance_id
+        data_tests:
+          - not_null
+          - unique
+      - name: date_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: campaign_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_campaigns')
+                field: campaign_id
+      - name: ad_group_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_ad_groups')
+                field: ad_group_id
+      - name: channel_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_id
+
+  - name: fct_conversion_attribution
+    columns:
+      - name: conversion_id
+        data_tests:
+          - not_null
+          - unique
+      - name: date_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: campaign_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_campaigns')
+                field: campaign_id
+      - name: ad_group_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_ad_groups')
+                field: ad_group_id
+      - name: first_touch_channel_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_id
+      - name: last_touch_channel_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_id

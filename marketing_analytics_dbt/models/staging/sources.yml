@@ -1,0 +1,23 @@
+
+version: 2
+
+sources:
+  - name: marketing_campaigns
+    database: MARKETING_ANALYTICS_DB
+    schema: RAW
+
+    tables:
+      - name: channels
+        identifier: RAW_MC_CHANNELS
+
+      - name: campaigns
+        identifier: RAW_MC_CAMPAIGNS
+
+      - name: ad_groups
+        identifier: RAW_MC_AD_GROUPS
+
+      - name: daily_performance
+        identifier: RAW_MC_DAILY_PERFORMANCE
+
+      - name: conversions
+        identifier: RAW_MC_CONVERSIONS

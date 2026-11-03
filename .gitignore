@@ -1,0 +1,43 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+ENV/
+
+# Airflow
+airflow/logs/
+airflow/plugins/
+airflow/config/
+
+# dbt
+target/
+dbt_packages/
+logs/
+.DS_Store
+
+# Local data files
+data/raw/
+data/processed/
+*.parquet
+*.csv
+
+# IDE and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Local dbt credentials
+airflow/dbt/profiles.yml
+airflow/dbt/.user.yml
